@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Loader from "./loader";
 
 function Dashboard() {
   const [books, setBooks] = useState([]);
@@ -8,12 +9,16 @@ function Dashboard() {
   const [genreFilter, setGenreFilter] = useState("All");
   const [statusFilter, setStatusFilter] = useState("All");
   const [page, setPage] = useState(1);
+   const [loading, setLoading] = useState(true);
   const limit = 10;
 
 useEffect(() => {
+  setLoading(true)
   axios.get("http://localhost:9006/books")
     .then((res) => setBooks(res.data))
+    
     .catch(err => console.error(err));
+    setLoading(false)
 }, []);
 
   const handleDelete = (id) => {
@@ -44,6 +49,7 @@ useEffect(() => {
   const pageItems = filtered?.slice((page - 1) * limit, page * limit);
 
   return (
+    
     <div className="container py-4">
       <div className="row g-3 mb-4">
         <div className="col-md-4">
@@ -78,7 +84,10 @@ useEffect(() => {
           </select>
         </div>
       </div>
-
+{loading ? (
+        <Loader /> // Show loader when loading is true
+      ) : (
+        <>
       <table className="table table-striped table-bordered">
         <thead className="table-light">
           <tr>
@@ -153,6 +162,9 @@ useEffect(() => {
           </button>
         </div>
       </div>
+</>
+      )}
+
     </div>
   );
 }

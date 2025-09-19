@@ -49,7 +49,6 @@ function BokForm() {
       >
         {({ isSubmitting }) => (
           <Form className="row g-3">
-            {/* Title */}
             <div className="col-md-6">
               <label className="form-label">Title</label>
               <Field
@@ -63,8 +62,6 @@ function BokForm() {
                 className="text-danger small"
               />
             </div>
-
-            {/* Author */}
             <div className="col-md-6">
               <label className="form-label">Author</label>
               <Field
@@ -78,8 +75,6 @@ function BokForm() {
                 className="text-danger small"
               />
             </div>
-
-            {/* Genre */}
             <div className="col-md-6">
               <label className="form-label">Genre</label>
               <Field
@@ -93,8 +88,6 @@ function BokForm() {
                 className="text-danger small"
               />
             </div>
-
-            {/* Published Year */}
             <div className="col-md-6">
               <label className="form-label">Published Year</label>
               <Field
@@ -109,7 +102,6 @@ function BokForm() {
               />
             </div>
 
-            {/* Status */}
             <div className="col-md-6">
               <label className="form-label">Status</label>
               <Field as="select" name="status" className="form-select">
@@ -123,8 +115,6 @@ function BokForm() {
                 className="text-danger small"
               />
             </div>
-
-            {/* Buttons */}
             <div className="col-12">
               <button
                 type="submit"

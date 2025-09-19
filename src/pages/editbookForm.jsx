@@ -3,8 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-
-// Validation Schema
+import Loader from "./loader";
 const BookSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
   author: Yup.string().required("Author is required"),
@@ -21,9 +20,9 @@ function EditBookForm() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(null);
-
-  // Fetch existing book data
+     const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true)
     axios
       .get(`http://localhost:9006/books/${id}`)
       .then((res) => {
@@ -34,11 +33,13 @@ function EditBookForm() {
         alert("Error loading book.");
         navigate("/");
       });
+      setLoading(false)
   }, [id, navigate]);
 
   const handleSubmit = async (values, { setSubmitting }) => {
     console.log(values,"vals")
     try {
+        setLoading(true);
       await axios.put(`http://localhost:9006/books/${id}`, values);
       alert("Book updated successfully!");
       navigate("/");
@@ -47,6 +48,7 @@ function EditBookForm() {
       alert("Failed to update book.");
     } finally {
       setSubmitting(false);
+      setLoading(false);
     }
   };
 
@@ -55,7 +57,10 @@ function EditBookForm() {
   return (
     <div className="container py-4">
       <h2 className="mb-4">Edit Book</h2>
-
+{loading ? (
+        <Loader /> 
+      ) : (
+        <>
       <Formik
         initialValues={initialValues}
         validationSchema={BookSchema}
@@ -64,7 +69,6 @@ function EditBookForm() {
       >
         {({ isSubmitting }) => (
           <Form className="row g-3">
-            {/* Title */}
             <div className="col-md-6">
               <label className="form-label">Title</label>
               <Field name="title" type="text" className="form-control" />
@@ -74,8 +78,6 @@ function EditBookForm() {
                 className="text-danger small"
               />
             </div>
-
-            {/* Author */}
             <div className="col-md-6">
               <label className="form-label">Author</label>
               <Field name="author" type="text" className="form-control" />
@@ -85,8 +87,6 @@ function EditBookForm() {
                 className="text-danger small"
               />
             </div>
-
-            {/* Genre */}
             <div className="col-md-6">
               <label className="form-label">Genre</label>
               <Field name="genre" type="text" className="form-control" />
@@ -96,8 +96,6 @@ function EditBookForm() {
                 className="text-danger small"
               />
             </div>
-
-            {/* Published Year */}
             <div className="col-md-6">
               <label className="form-label">Published Year</label>
               <Field
@@ -111,8 +109,6 @@ function EditBookForm() {
                 className="text-danger small"
               />
             </div>
-
-            {/* Status */}
             <div className="col-md-6">
               <label className="form-label">Status</label>
               <Field as="select" name="status" className="form-select">
@@ -126,8 +122,6 @@ function EditBookForm() {
                 className="text-danger small"
               />
             </div>
-
-            {/* Buttons */}
             <div className="col-12">
               <button
                 type="submit"
@@ -147,6 +141,8 @@ function EditBookForm() {
           </Form>
         )}
       </Formik>
+      </>
+      )}
     </div>
   );
 }
