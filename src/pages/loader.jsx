@@ -1,6 +1,4 @@
-// Loader.jsx
-import React from 'react';
-import './loader.css'; // Make sure to create this CSS file
+import './loader.css';
 
 const Loader = () => {
   return (
