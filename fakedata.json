@@ -1,0 +1,44 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgeralc",
+      "genre": "Classic",
+      "publishedYear": 1925,
+      "status": "Available"
+    },
+    {
+      "id": "2",
+      "title": "1984",
+      "author": "George Orweleee",
+      "genre": "Dystopian",
+      "publishedYear": 1949,
+      "status": "Issued"
+    },
+    {
+      "id": "3",
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "genre": "Fiction",
+      "publishedYear": 1960,
+      "status": "Available"
+    },
+    {
+      "id": "4",
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "genre": "Romance",
+      "publishedYear": 1813,
+      "status": "Available"
+    },
+    {
+      "id": "5",
+      "title": "Moby Dick",
+      "author": "Herman Melville",
+      "genre": "Adventure",
+      "publishedYear": 1851,
+      "status": "Unavailable"
+    }
+  ]
+}
